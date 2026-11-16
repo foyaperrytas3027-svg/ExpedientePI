@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Las infidelidades de Perico — Carpeta de Investigación</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body class="bloqueado">
+    <!-- Pantalla de acceso con contraseña -->
+    <div id="pantalla-acceso" class="pantalla-acceso" role="dialog" aria-modal="true" aria-labelledby="titulo-acceso">
+        <div class="tarjeta-acceso">
+            <span class="apartado-pill pill-enemigo">EXPEDIENTE #001 // ACCESO RESTRINGIDO</span>
+            <h2 id="titulo-acceso">Archivo Clasificado</h2>
+            <p class="texto-acceso">Ingresa la contraseña para abrir la carpeta de investigación.</p>
+            <form id="form-acceso" onsubmit="validarClave(event)">
+                <div class="clave-input-grupo">
+                    <input type="password" id="input-clave" placeholder="Escribe la contraseña..." autocomplete="off" required autofocus>
+                    <button type="button" class="btn-ver-clave" onclick="alternarVisibilidadClave()" aria-label="Mostrar u ocultar contraseña">Ver</button>
+                </div>
+                <button type="submit" class="btn-accion btn-desbloquear">Desbloquear expediente</button>
+                <p id="error-clave" class="error-clave" aria-live="polite"></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="fondo-clasificado" aria-hidden="true">
+        <span class="watermark-stamp wm-1">CONFIDENCIAL</span>
+        <span class="watermark-stamp wm-2">CLASIFICADO // #001</span>
+        <span class="watermark-stamp wm-3">ARCHIVO RESERVADO</span>
+    </div>
+    <div class="layout">
+        <aside class="sidebar">
+            <button class="home-corner-btn active" id="btn-home" onclick="mostrarSeccion('home', this)">
+                <span class="case-tag">EXPEDIENTE #001</span>
+                <span class="home-title">INICIO / HOME</span>
+                <span class="home-sub">Carpeta Principal</span>
+            </button>
+
+            <div class="sidebar-divider">ARCHIVOS DEL CASO</div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-btn" onclick="mostrarSeccion('lista-alfabetica', this)">
+                    01. Lista alfabética de las amantes
+                </button>
+                <button class="nav-btn" onclick="mostrarSeccion('top-5', this)">
+                    02. Las Top 5
+                </button>
+                <button class="nav-btn" onclick="mostrarSeccion('trampas', this)">
+                    03. Trampas descubiertas
+                </button>
+                <button class="nav-btn" onclick="mostrarSeccion('historia-novia', this)">
+                    04. Historia que le cuenta a su novia
+                </button>
+                <button class="nav-btn nav-btn-enemigo" onclick="mostrarSeccion('enemigo', this)">
+                    05. Enemigo
+                </button>
+            </nav>
+        </aside>
+
+        <main class="contenido">
+            <div class="dossier-folder">
+                <div class="folder-tab">CARPETA DE INVESTIGACIÓN // CONFIDENCIAL</div>
+
+                <header class="page-header">
+                    <h1>Las infidelidades de Perico</h1>
+                    <p class="header-meta">UNIDAD DE SEGUIMIENTO — CASO ALEXANDER CONTRERAS RAMIREZ</p>
+                </header>
+
+                <!-- Sección Home / Casa -->
+                <section id="home" class="seccion activa">
+                    <div class="seccion-cabecera">
+                        <span class="apartado-pill">EXPEDIENTE PRINCIPAL // RESUMEN</span>
+                    </div>
+                    <div class="perfil-sospechoso reveal-scroll">
+                        <div class="foto-negra" aria-label="Foto de perfil en negro"></div>
+                        <p class="alias-perfil">Chande_eer</p>
+                        <div class="sello-sospechoso">SOSPECHOSO</div>
+                    </div>
+
+                    <div class="documento reveal-scroll reveal-left">
+                        <h2>Especificaciones del Sujeto</h2>
+                        <ul class="especificaciones">
+                            <li><strong>Nombre completo:</strong> Alexander Contreras Ramirez</li>
+                            <li><strong>Apodo:</strong> Perico</li>
+                            <li><strong>Usuario / Alias:</strong> Chande_eer</li>
+                            <li><strong>Carrera:</strong> Psicología</li>
+                            <li><strong>Universidad:</strong> Universidad UPC (entorno con bastantes chicas)</li>
+                            <li><strong>Novia actual:</strong> Camila (en quinto de secundaria — solo se llevan 1 año)</li>
+                            <li><strong>Estado del expediente:</strong> Abierto — Bajo vigilancia</li>
+                            <li><strong>Modus operandi:</strong> Coartadas universitarias, salidas al Británico, entrenamientos en Smart Fit y contacto constante con excompañeras de promo</li>
+                        </ul>
+                    </div>
+
+                    <div class="documento reveal-scroll reveal-right">
+                        <h2>Nota del Investigador</h2>
+                        <p>
+                            Este expediente recopila los registros verificados sobre <strong>Alexander Contreras Ramirez (Perico)</strong>,
+                            estudiante de Psicología en la UPC. Utiliza el menú de la izquierda para revisar la lista alfabética,
+                            el Top 5, las trampas ya expuestas y las historias que le cuenta a su novia actual, Camila.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Sección 1: Lista alfabética de las amantes -->
+                <section id="lista-alfabetica" class="seccion">
+                    <div class="seccion-cabecera">
+                        <span class="apartado-pill">APARTADO 01 // DIRECTORIO A–Z</span>
+                        <h2>01. Lista alfabética de las amantes</h2>
+                        <p class="intro">Registro clasificado de la A a la Z. (Camila queda excluida por ser su novia actual).</p>
+                    </div>
+
+                    <div class="documento form-agregar reveal-scroll">
+                        <h3>Agregar nuevo registro a la lista</h3>
+                        <form id="form-amante" onsubmit="agregarAmante(event)">
+                            <div class="form-fila">
+                                <input type="text" id="nuevo-nombre" placeholder="Nombre (ej. Valeria)" required>
+                                <input type="text" id="nuevo-detalle" placeholder="Detalle u origen (ej. De la UPC / del Británico)">
+                                <button type="submit" class="btn-accion">Agregar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="documento reveal-scroll">
+                        <h3>Registro General (Orden Alfabético)</h3>
+                        <ul id="lista-amantes-ul" class="lista-registros"></ul>
+                    </div>
+                </section>
+
+                <!-- Sección 2: Las Top 5 -->
+                <section id="top-5" class="seccion">
+                    <div class="seccion-cabecera">
+                        <span class="apartado-pill">APARTADO 02 // PRIORIDAD ALTA</span>
+                        <h2>02. Las Top 5</h2>
+                        <p class="intro">Clasificación prioritaria según nivel de cercanía, frecuencia y riesgo para la relación con Camila.</p>
+                    </div>
+
+                    <ol class="ranking-list">
+                        <li class="documento reveal-scroll reveal-left">
+                            <span class="badge">N° 1</span>
+                            <div>
+                                <h3>Yara "La del Cuidado"</h3>
+                                <p>Conocida del Británico. Prioridad máxima en el expediente por contacto constante y coartadas difíciles de rastrear.</p>
+                            </div>
+                        </li>
+                        <li class="documento reveal-scroll reveal-right">
+                            <span class="badge">N° 2</span>
+                            <div>
+                                <h3>Andrea "La que canta tiempo"</h3>
+                                <p>Apariciones frecuentes y excusas ligadas a ensayos o reuniones fuera de horario.</p>
+                            </div>
+                        </li>
+                        <li class="documento reveal-scroll reveal-left">
+                            <span class="badge">N° 3</span>
+                            <div>
+                                <h3>Angela</h3>
+                                <p>De su misma carrera (Psicología en la UPC). Ventaja directa por compartir horarios, aulas y trabajos grupales.</p>
+                            </div>
+                        </li>
+                        <li class="documento reveal-scroll reveal-right">
+                            <span class="badge">N° 4</span>
+                            <div>
+                                <h3>Marta (Española del Smart Fit)</h3>
+                                <p>Contacto frecuente en el gimnasio bajo el pretexto de rutinas y entrenamientos compartidos.</p>
+                            </div>
+                        </li>
+                        <li class="documento reveal-scroll reveal-left">
+                            <span class="badge">N° 5</span>
+                            <div>
+                                <h3>Gabriela Rimari</h3>
+                                <p>De su promo de colegio. Confianza previa que facilita reencuentros y conversaciones privadas.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- Sección 3: Trampas descubiertas -->
+                <section id="trampas" class="seccion">
+                    <div class="seccion-cabecera">
+                        <span class="apartado-pill">APARTADO 03 // PRUEBAS Y CASOS</span>
+                        <h2>03. Trampas descubiertas</h2>
+                        <p class="intro">Hechos confirmados donde fue descubierto haciendo algo con las chicas y quedó expuesto.</p>
+                    </div>
+
+                    <div class="bloque-separado reveal-scroll">
+                        <div class="bloque-titulo-fila">
+                            <span class="sub-tag">BLOQUE A — EVIDENCIA VISUAL</span>
+                            <h3>Evidencia Fotográfica de Infidelidad (3 Archivos)</h3>
+                        </div>
+                        <p class="intro-evidencia">Haz clic en cualquier fotografía para ampliarla y navegar entre ellas. Desliza hacia abajo o arriba para activar las animaciones.</p>
+                        <div class="galeria-evidencia">
+                            <figure class="evidencia-card reveal-scroll reveal-left" onclick="abrirVisor('fotos/evidencia_1.jpeg', 'Evidencia #01 — Registro fotográfico de infidelidad')">
+                                <span class="clip-etiqueta">PRUEBA #01</span>
+                                <div class="marco-foto">
+                                    <img src="fotos/evidencia_1.jpeg" alt="Evidencia de infidelidad 1" loading="lazy">
+                                </div>
+                                <figcaption>Evidencia #01 — Archivo verificado</figcaption>
+                            </figure>
+                            <figure class="evidencia-card reveal-scroll" onclick="abrirVisor('fotos/evidencia_2.jpeg', 'Evidencia #02 — Registro fotográfico de infidelidad')">
+                                <span class="clip-etiqueta">PRUEBA #02</span>
+                                <div class="marco-foto">
+                                    <img src="fotos/evidencia_2.jpeg" alt="Evidencia de infidelidad 2" loading="lazy">
+                                </div>
+                                <figcaption>Evidencia #02 — Archivo verificado</figcaption>
+                            </figure>
+                            <figure class="evidencia-card reveal-scroll reveal-right" onclick="abrirVisor('fotos/evidencia_3.jpeg', 'Evidencia #03 — Registro fotográfico de infidelidad')">
+                                <span class="clip-etiqueta">PRUEBA #03</span>
+                                <div class="marco-foto">
+                                    <img src="fotos/evidencia_3.jpeg" alt="Evidencia de infidelidad 3" loading="lazy">
+                                </div>
+                                <figcaption>Evidencia #03 — Archivo verificado</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div class="separador-expediente" aria-hidden="true"><span>REGISTRO ESCRITO</span></div>
+
+                    <div class="documento form-agregar reveal-scroll">
+                        <span class="sub-tag">BLOQUE B — NUEVO REPORTE</span>
+                        <h3>Agregar nueva trampa descubierta</h3>
+                        <form id="form-trampa" onsubmit="agregarTrampa(event)">
+                            <div class="form-columna">
+                                <input type="text" id="trampa-titulo" placeholder="Título del caso (ej. Captado en el patio de la UPC)" required>
+                                <textarea id="trampa-desc" rows="2" placeholder="Describe qué estaba haciendo y cómo fue expuesto..." required></textarea>
+                                <button type="submit" class="btn-accion">Registrar evidencia</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="lista-trampas-contenedor"></div>
+                </section>
+
+                <!-- Sección 4: Historia que le cuenta a su novia -->
+                <section id="historia-novia" class="seccion">
+                    <div class="seccion-cabecera">
+                        <span class="apartado-pill">APARTADO 04 // COARTADAS</span>
+                        <h2>04. Historia que le cuenta a su novia (Camila)</h2>
+                        <p class="intro">Declaraciones oficiales y versiones preparadas por Perico para convencer a Camila (quien está en quinto de secundaria).</p>
+                    </div>
+
+                    <div class="documento reveal-scroll reveal-left">
+                        <h3>Declaración 01 — "Amor, estaba en trabajo grupal de la UPC"</h3>
+                        <p>
+                            <em>Versión de Perico:</em> "Camila, en Psicología casi todos los grupos son de puras chicas como Angela,
+                            no significa nada, solo estábamos avanzando la exposición hasta tarde."
+                        </p>
+                    </div>
+                    <div class="documento reveal-scroll reveal-right">
+                        <h3>Declaración 02 — "Solo salí del Británico y me fui al Smart Fit"</h3>
+                        <p>
+                            <em>Versión de Perico:</em> "Estuve estudiando inglés y luego me fui directo a entrenar,
+                            por eso no te contesté en toda la tarde. Tú sabes que solo tengo ojos para ti."
+                        </p>
+                    </div>
+                    <div class="documento reveal-scroll reveal-left">
+                        <h3>Declaración 03 — "Eran mis amigas de la promo"</h3>
+                        <p>
+                            <em>Versión de Perico:</em> "Solo me crucé con las chicas del colegio para recordar viejos tiempos,
+                            no pasó absolutamente nada."
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Sección 5: Enemigo (Apartado independiente) -->
+                <section id="enemigo" class="seccion">
+                    <div class="seccion-cabecera">
+                        <span class="apartado-pill pill-enemigo">APARTADO 05 // OBJETIVO HOSTIL</span>
+                        <h2>05. Enemigo</h2>
+                        <p class="intro">Apartado independiente del expediente dedicado al registro visual y seguimiento del enemigo.</p>
+                    </div>
+
+                    <div class="documento documento-alerta reveal-scroll">
+                        <span class="sub-tag">ESTADO: CLASIFICADO</span>
+                        <h3>Expediente Clasificado — Objetivo Hostil</h3>
+                        <p>
+                            Registro fotográfico separado de la carpeta principal de infidelidades. Estas 2 capturas pertenecen
+                            exclusivamente al apartado de <strong>Enemigo</strong>.
+                        </p>
+                    </div>
+
+                    <div class="separador-expediente" aria-hidden="true"><span>ARCHIVOS DEL OBJETIVO</span></div>
+
+                    <div class="galeria-enemigo">
+                        <figure class="evidencia-card enemigo-card reveal-scroll reveal-left" onclick="abrirVisor('fotos/enemigo_1.jpeg', 'Enemigo #01 — Registro fotográfico')">
+                            <span class="clip-etiqueta clip-enemigo">ENEMIGO #01</span>
+                            <div class="marco-foto marco-enemigo">
+                                <img src="fotos/enemigo_1.jpeg" alt="Foto de enemigo 1" loading="lazy">
+                            </div>
+                            <figcaption>Archivo enemigo_1 — Objetivo identificado</figcaption>
+                        </figure>
+                        <figure class="evidencia-card enemigo-card reveal-scroll reveal-right" onclick="abrirVisor('fotos/enemigo_2.jpeg', 'Enemigo #02 — Registro fotográfico')">
+                            <span class="clip-etiqueta clip-enemigo">ENEMIGO #02</span>
+                            <div class="marco-foto marco-enemigo">
+                                <img src="fotos/enemigo_2.jpeg" alt="Foto de enemigo 2" loading="lazy">
+                            </div>
+                            <figcaption>Archivo enemigo_2 — Objetivo identificado</figcaption>
+                        </figure>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Visor interactivo para ampliar fotografías -->
+    <div id="visor-imagen" class="visor-modal" onclick="cerrarVisor(event)" aria-hidden="true">
+        <div class="visor-contenido">
+            <button type="button" class="visor-cerrar" onclick="cerrarVisor()" aria-label="Cerrar imagen">&times;</button>
+            <button type="button" class="visor-nav visor-prev" onclick="navegarVisor(-1, event)" aria-label="Foto anterior">&#10094;</button>
+            <img id="visor-img" src="" alt="Vista ampliada">
+            <button type="button" class="visor-nav visor-next" onclick="navegarVisor(1, event)" aria-label="Foto siguiente">&#10095;</button>
+            <p id="visor-caption" class="visor-caption"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
